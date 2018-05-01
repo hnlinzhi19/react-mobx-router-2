@@ -38,7 +38,7 @@ export default class MyLayout extends React.Component{
     }   
     return (
       <div>
-        <Layout>
+        <Layout className="app-layout">
           <Header style={{ background: '#fff', padding: 0 }}>Header</Header>
           <Layout>
             <Sider collapsible collapsed={this.collapsed}  onCollapse={this.onCollapse} style={{ background: '#fff', padding: 0 }}>

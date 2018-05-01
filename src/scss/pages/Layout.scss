@@ -1,10 +1,13 @@
-.ant-layout {
+.app-layout{
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   width: 100%;
-  &.ant-layout-has-sider{
-    position: static;
+  .ant-layout-sider{
+    overflow-y: auto;
+  }
+  .ant-layout-content{
+    overflow: auto;
   }
 }
