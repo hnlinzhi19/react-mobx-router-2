@@ -1,0 +1,8 @@
+.ant-layout {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%; }
+  .ant-layout.ant-layout-has-sider {
+    position: static; }
