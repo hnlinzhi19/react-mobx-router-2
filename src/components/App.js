@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import {inject} from 'mobx-react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import loadable from 'loadable-components';
+import Loading from './Ui/Loading';
 
 import 'antd/dist/antd.css';
-import Login from './Login';
+import '../scss/pages/App.css';
+// import Login from './Login';
 import Layout from './Layout';
+
+const loadingObj = {
+  LoadingComponent: Loading,
+}
+const Login = loadable(() => import('./Login'), loadingObj);
+const Register = loadable(() => import('./Register'), loadingObj);
+
 
 // import routes from './Routes';
 // import logo from '../imgs/logo.svg';
-import '../scss/pages/App.css';
 
 @inject('store')
 class App extends Component {
@@ -18,6 +27,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route path="/home" component={Layout} />
           <Route component={Layout} />
         </Switch>

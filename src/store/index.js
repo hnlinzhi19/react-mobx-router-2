@@ -12,7 +12,7 @@ export default class TodoModel {
   @action 
   setLogin(){
     setTimeout(() => {
-      this.login = true;
+      this.login = false;
     }, 3000);
   }
   @action

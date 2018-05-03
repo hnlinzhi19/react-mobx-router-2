@@ -1,16 +1,5 @@
-import React from 'react';
 import loadable from 'loadable-components';
-import {Spin} from 'antd';
-
-class Loading extends React.Component {
-  render(){
-    return (
-      <div className="loading-router">
-        <Spin />
-      </div>
-    )
-  }
-}
+import Loading from './Ui/Loading';
 
 const loadingObj = {
   LoadingComponent: Loading,  
