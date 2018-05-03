@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'mobx-react';
 import './scss/pages/index.css';
-import App from './components/App';
+import App from './component/App';
 import registerServiceWorker from './registerServiceWorker';
 import Todo from './store/index';
 
