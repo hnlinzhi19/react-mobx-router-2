@@ -1,12 +1,12 @@
 import loadable from 'loadable-components';
-import Loading from './Ui/Loading';
+import Loading from '../component/Ui/Loading';
 
 const loadingObj = {
   LoadingComponent: Loading,  
 }
 
-const Home = loadable(() => import('./Home'), loadingObj);
-const Test = loadable(() => import('./Test'), loadingObj);
+const Home = loadable(() => import('../component/Home'), loadingObj);
+const Test = loadable(() => import('../component/Test'), loadingObj);
 
 const routes = [
   {

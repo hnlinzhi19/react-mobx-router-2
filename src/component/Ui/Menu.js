@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import { observer} from 'mobx-react';
 import {observable, action } from 'mobx';
-import routes from '../Routes';
+import routes from '../../common/Routes';
 
 @withRouter
 @observer

@@ -3,8 +3,10 @@ import {withRouter, Redirect,Route} from 'react-router-dom';
 import { action, observable } from 'mobx';
 import { inject, observer} from 'mobx-react';
 import { Layout } from 'antd';
+import {getLoginStatus} from '../common/Mixin';
+import Loading from './Ui/Loading';
 
-import routes from './Routes';
+import routes from '../common/Routes';
 import Menu from './Ui/Menu';
 import '../scss/pages/Layout.css';
 
@@ -12,6 +14,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 @inject('store')
 @withRouter
+@getLoginStatus()
 @observer
 export default class MyLayout extends React.Component{
   @observable collapsed = false;
@@ -24,12 +27,15 @@ export default class MyLayout extends React.Component{
   }
 
   render(){
-    const {login} = this.props.store;
+    const {login, isLoadedLogin} = this.props.store;
     const {pathname} = this.props.location;
     const from  = { 
       pathname: "/login", 
       state: {from: pathname} 
     };
+    if (!isLoadedLogin) {
+      return (<Loading />)
+    }
     if (!login) {
       return <Redirect to={from} />;
     }
@@ -52,7 +58,6 @@ export default class MyLayout extends React.Component{
           </Layout>
           <Footer>Footer</Footer>
         </Layout>
-        
       </div>
     );
   }

@@ -2,7 +2,8 @@ import React from 'react';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import { inject ,observer} from 'mobx-react';
 import { Form, Input, Button } from 'antd';
-
+import {getLoginStatus} from '../common/Mixin';
+import Loading from './Ui/Loading';
 import '../scss/pages/Login.css';
 
 const FormItem = Form.Item;
@@ -10,11 +11,9 @@ const FormItem = Form.Item;
 
 @inject('store')
 @withRouter
+@getLoginStatus()
 @observer
 class Register extends React.Component{
-  componentWillMount(){
-    this.props.store.setLogin();
-  }
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -24,7 +23,7 @@ class Register extends React.Component{
     });
   }
   render(){
-    const {login} = this.props.store;
+    const {login,isLoadedLogin} = this.props.store;
     const { from } = this.props.location.state || { from: { pathname: "/home/" } };
     // console.log(this.props.location);
     const { getFieldDecorator } = this.props.form;
@@ -39,6 +38,9 @@ class Register extends React.Component{
         sm: { span: 16 },
       },
     };
+    if (!isLoadedLogin) {
+      return (<Loading />)
+    }
     if (login) {
       return (
         <Redirect to={from} />
