@@ -3,6 +3,7 @@ import {withRouter, Redirect, Link} from 'react-router-dom';
 import { inject ,observer} from 'mobx-react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import {getLoginStatus} from '../common/Mixin';
+import {loginApi} from '../common/Api';
 import Loading from './Ui/Loading';
 import '../scss/pages/Login.css';
 
@@ -16,16 +17,23 @@ const FormItem = Form.Item;
 class Login extends React.Component{
   handleSubmit = (e) => {
     e.preventDefault();
+    const self = this;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        loginApi(values).then((res) => {
+          console.log(res);
+          if (res.token) {
+            localStorage.setItem('LINZ_BLOG_TOKEN', res.token);
+            self.props.store.setLogin(true);
+          }
+        });
       }
     });
   }
   render(){
     const {login, isLoadedLogin} = this.props.store;
-    const { from } = this.props.location.state || { from: { pathname: "/home/" } };
-    // console.log(this.props.location);
+    const { from } = this.props.location.state || { from: { pathname: "/home" } };
     const { getFieldDecorator } = this.props.form;
     if (!isLoadedLogin) {
       return (<Loading />)
@@ -40,7 +48,7 @@ class Login extends React.Component{
         <div className="login-wrapper">
         <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />

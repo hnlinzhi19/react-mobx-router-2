@@ -18,9 +18,6 @@ const { Header, Footer, Sider, Content } = Layout;
 @observer
 export default class MyLayout extends React.Component{
   @observable collapsed = false;
-  componentWillMount(){
-    this.props.store.setLogin();
-  }
   @action
   onCollapse = (collapsed) => {
     this.collapsed = collapsed;    

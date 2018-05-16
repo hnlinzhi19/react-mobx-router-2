@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Toast } from 'vant';
 
 // 创建axios实例
 const http = axios.create({
@@ -11,13 +10,12 @@ const errHandler = (err) => {
   if (err.name === 'SyntaxError') {
     return;
   }
-  const response = err.response || {};
-  const { code: errCode, message: errMsg } = response;
-  let msg = '服务器未知异常';
-  if (errMsg && String(errCode) !== '404') {
-    msg = errMsg;
-  }
-  Toast.fail(msg);
+  // const response = err.response || {};
+  // const { code: errCode, message: errMsg } = response;
+  // let msg = '服务器未知异常';
+  // if (errMsg && String(errCode) !== '404') {
+  //   msg = errMsg;
+  // }
 };
 
 // request拦截器
